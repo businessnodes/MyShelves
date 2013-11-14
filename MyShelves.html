@@ -152,7 +152,12 @@
 		{{> account_images}}
 		<div id="delete-image-form" title="Delete Shelf">
 			<p>Are you sure you want to delete this shelf?</p>
-			<input type="hidden" id="image-to-delete" />
+			<input type="hidden" id="image-to-delete">
+		</div>
+		<div id="edit-tags-form" title="Edit Tags">
+			<p>Tags: <input type="text" id="edit-tags" class="input-large">
+			<span class="help-block">Separated by comma(s).</span></p>
+			<input type="hidden" id="image-to-edit">
 		</div>
 	{{/if}}
 	{{#if pageIs "account"}}
@@ -162,14 +167,14 @@
 		{{> lenders}}
 		<div id="cancel-request-form" title="Cancel Request">
 			<p>Are you sure you want to cancel this request?</p>
-			<input type="hidden" id="request-to-delete" />
+			<input type="hidden" id="request-to-delete">
 		</div>
 	{{/if}}
 	{{#if pageIs "borrowers"}}
 		{{> borrowers}}
 		<div id="decline-loan-form" title="Decline Loan">
 			<p>Are you sure you want to decline this loan?</p>
-			<input type="hidden" id="request-to-delete" />
+			<input type="hidden" id="request-to-delete">
 		</div>
 	{{/if}}
 	{{#if pageIs "search"}}
@@ -284,13 +289,23 @@
 				<ul class="thumbnails">
 					{{#each thumbnails}}
 						<li class="span3">
-							<p class="thumbnail">
-								<a href="#" class="delete-shelf pull-right">
-									<span class="icon-remove"></span>
-								</a>
+							<div class="thumbnail">
+								<div class="nav-collapse collapse">
+									<ul class="nav pull-right">
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												<span class="icon-cog"></span>
+											</a>
+											<ul class="dropdown-menu text-right">
+												<li><a href="#" class="edit-tags">Edit Tags</a></li>
+												<li><a href="#" class="delete-shelf">Delete Shelf</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
 								<img src="{{image}}/convert?w=200&h=250"  
 									class="shelf-image" alt="{{image}}" />
-							</p>
+							</div>
 							<ul class="inline unstyled">
 								{{#each tags}}
 									<li><span class="label">{{tag}}</span>

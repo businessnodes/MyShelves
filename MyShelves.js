@@ -114,6 +114,30 @@ if (Meteor.isClient) {
 				}
 			}
 		});
+		$("#edit-tags-form").dialog({
+			autoOpen: false,
+			height: 215,
+			width: 350,
+			modal: true,
+			buttons: {
+				Ok: function() {
+					var id = $("#image-to-edit").val();
+					// delete old tags
+					Images.update(id,
+						{$set: {tags: []}});
+					// push new tags
+					var tags = $("#edit-tags").val().split(",");
+					for (var i = 0; i < tags.length; i++) {
+						Images.update(id,
+							{$push: {tags: {tag: tags[i]}}});
+					}
+					$(this).dialog("close");
+				},
+				Cancel: function() {
+					$(this).dialog("close");
+				}
+			}
+		});
 	};
 	
 	function isEmail(email) {
@@ -247,6 +271,15 @@ if (Meteor.isClient) {
 	});
 	
 	Template.account_images.events({
+		'click .edit-tags': function() {
+			var tags = [];
+			this.tags.forEach(function(tag){
+				tags.push(tag.tag);
+			});
+			$("#edit-tags").val(tags.join());
+			$("#image-to-edit").val(this._id);
+			$("#edit-tags-form").dialog("open");
+		},
 		'click .delete-shelf': function() {
 			$("#image-to-delete").val(this._id);
 			$("#delete-image-form").dialog("open");
