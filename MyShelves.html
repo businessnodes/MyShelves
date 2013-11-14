@@ -52,7 +52,11 @@
 			{{#if currentUser.username}}
 				{{currentUser.username}}
 			{{else}}
-				{{currentUser.services.facebook.username}}
+				{{#if currentUser.services.facebook.username}}
+					{{currentUser.services.facebook.username}}
+				{{else}}
+					{{currentUser.emails.0.address}}
+				{{/if}}
 			{{/if}}
 			 <b class="caret"></b>
 		</a>
@@ -203,7 +207,16 @@
 						<div class="item active">
 							<img src="{{activeImage.image}}" alt="{{activeImage.image}}" />
 							<div class="carousel-caption">
-								<h4>{{activeImage.user.services.facebook.username}}&apos;s Shelf</h4>
+								<h4>
+									{{#if activeImage.user.username}}
+										{{activeImage.user.username}}
+									{{else}}
+										{{#if activeImage.user.services.facebook.username}}
+											{{activeImage.user.services.facebook.username}}
+										{{else}}
+											{{activeImage.user.emails.0.address}}
+										{{/if}}
+									{{/if}}&apos;s Shelf</h4>
 								{{#if activeImage.tags}}
 									<ul class="inline unstyled">
 										{{#each activeImage.tags}}
@@ -220,7 +233,16 @@
 							<div class="item">
 								<img src="{{image}}" alt="{{image}}" />
 								<div class="carousel-caption">
-									<h4>{{user.services.facebook.username}}&apos;s Shelf</h4>
+									<h4>
+										{{#if activeImage.user.username}}
+											{{activeImage.user.username}}
+										{{else}}
+											{{#if activeImage.user.services.facebook.username}}
+												{{activeImage.user.services.facebook.username}}
+											{{else}}
+												{{activeImage.user.emails.0.address}}
+											{{/if}}
+										{{/if}}&apos;s Shelf</h4>
 									{{#if tags}}
 										<ul class="inline unstyled">
 											{{#each tags}}
