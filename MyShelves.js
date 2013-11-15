@@ -322,6 +322,7 @@ if (Meteor.isServer) {
 	Meteor.startup(function() {
 		// code to run on server at startup
 		process.env.MAIL_URL = 'smtp://postmaster%40lookshelf.meteor.com:7zkje0yw-am5@smtp.mailgun.org:587';
+		process.env.MONGOHQ_URL = 'mongodb://tom:qwerty@paulo.mongohq.com:10012/lookshelf';
 	});
 	
 	Meteor.methods({
