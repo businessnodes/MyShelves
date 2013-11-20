@@ -273,9 +273,11 @@ if (Meteor.isClient) {
 	Template.account_images.events({
 		'click .edit-tags': function() {
 			var tags = [];
-			this.tags.forEach(function(tag){
-				tags.push(tag.tag);
-			});
+			if ('tags' in this) {
+				this.tags.forEach(function(tag){
+					tags.push(tag.tag);
+				});
+			}
 			$("#edit-tags").val(tags.join());
 			$("#image-to-edit").val(this._id);
 			$("#edit-tags-form").dialog("open");
